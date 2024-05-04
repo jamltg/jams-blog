@@ -23,3 +23,15 @@ app.listen(3000,()=>{
 //best practice is to use routes folder and use /api/user/
 app.use('/api/user', userRoutes);
 app.use('/api/auth', authRoutes);
+
+
+//middleware
+app.use((err,req,res,next) => {
+  const statusCode = err.statusCode || 500;
+  const message = err.message || 'Internal Server Error';
+  res.status(statusCode).json({
+    success:false,
+    statusCode,
+    message
+  });
+});
