@@ -24,3 +24,4 @@ dist-ssr
 *.sw?
 .env
 api/models/models.txt
+api/controllers/controllers.txt
