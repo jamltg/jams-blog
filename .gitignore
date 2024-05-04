@@ -25,3 +25,5 @@ dist-ssr
 .env
 api/models/models.txt
 api/controllers/controllers.txt
+api/controllers/.txt
+api/models/.txt
