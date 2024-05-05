@@ -2,6 +2,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import cors from 'cors';
 import userRoutes from './routes/user.route.js';
 import authRoutes from './routes/auth.route.js';
 
@@ -12,6 +13,15 @@ mongoose.connect(process.env.MONGO)
 .then(()=>{console.log('MongoDB is connected')}).catch((err)=>{console.log(err)})
 
 const app = express();
+
+//cors for cross-origin
+const corsOptions = {
+  origin:'*',
+  credentials:true,
+  optionSuccessStatus:200,
+}
+
+app.use(cors(corsOptions));
 
 //this code is to allow to send json to the backend
 app.use(express.json());
