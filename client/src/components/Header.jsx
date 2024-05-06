@@ -1,13 +1,18 @@
 import { Avatar, Button, Dropdown, Navbar, TextInput } from "flowbite-react";
 import { Link, useLocation } from "react-router-dom";
 import { AiOutlineSearch } from 'react-icons/ai';
-import { FaMoon } from 'react-icons/fa';
-import { useSelector } from "react-redux";
+import { FaMoon, FaSun } from 'react-icons/fa';
+import { useSelector, useDispatch } from "react-redux";
+import { toggleTheme } from "../redux/theme/themeSlice";
 
 export default function Header() {
+  const dispatch = useDispatch();
   //useLocation is to see which element is active
   const path = useLocation().pathname;
   const { currentUser } = useSelector(state=>state.user);
+
+  //we need to know what theme we have by getting the theme
+  const { theme } = useSelector((state)=>state.theme);
   return (
     <Navbar className="border-b-2">
       <Link to="/" className="self-center whitespace-nowrap text-sm font-semibold dark:text-white sm:text-xl">
@@ -28,8 +33,8 @@ export default function Header() {
         </Button>
       </form>
       <div className="flex gap-2 md:order-2">
-        <Button className="w-12 h-10 hidden lg:inline" color="gray" pill>
-          <FaMoon/>
+        <Button className="w-12 h-10 hidden lg:inline" color="gray" pill onClick={()=>dispatch(toggleTheme())}>
+          {theme === 'light' ? <FaSun/> : <FaMoon/>}
         </Button>
         {currentUser ? (
           <Dropdown
